@@ -11,14 +11,33 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 public class Testimony {
-    private final LocalDateTime when = LocalDateTime.now().plusDays(1);
-    private final TestifyFocus testifyFocus = TestifyFocus.TIME_FOCUSED;
-    private final StatementMethod statementMethod = StatementMethod.VERBAL_STATEMENT;
+    private LocalDateTime when;
+    private TestifyFocus testifyFocus;
+    private StatementMethod statementMethod;
     private TestifyMethod testifyMethod;
 
     public static Testimony of(
             TestifyMethod testifyMethod
     ) {
-        return new Testimony(testifyMethod);
+        return Testimony.builder()
+                .when(LocalDateTime.now().plusDays(1))
+                .testifyMethod(testifyMethod)
+                .testifyFocus(TestifyFocus.TIME_FOCUSED)
+                .statementMethod(StatementMethod.VERBAL_STATEMENT)
+                .build();
+    }
+
+    public static Testimony of(
+            LocalDateTime when,
+            TestifyMethod testifyMethod,
+            TestifyFocus testifyFocus,
+            StatementMethod statementMethod
+    ) {
+        return Testimony.builder()
+                .when(when)
+                .testifyMethod(testifyMethod)
+                .testifyFocus(testifyFocus)
+                .statementMethod(statementMethod)
+                .build();
     }
 }
