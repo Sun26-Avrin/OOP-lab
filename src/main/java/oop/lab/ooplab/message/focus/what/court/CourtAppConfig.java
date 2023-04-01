@@ -1,10 +1,8 @@
 package oop.lab.ooplab.message.focus.what.court;
 
+import oop.lab.ooplab.message.focus.what.court.other.GovernmentPolicy;
 import oop.lab.ooplab.message.focus.what.court.other.JobOfWitness;
-import oop.lab.ooplab.message.focus.what.court.receptor.SoccerPlayer;
-import oop.lab.ooplab.message.focus.what.court.receptor.Student;
-import oop.lab.ooplab.message.focus.what.court.receptor.Teacher;
-import oop.lab.ooplab.message.focus.what.court.receptor.Witness;
+import oop.lab.ooplab.message.focus.what.court.receptor.*;
 import oop.lab.ooplab.message.focus.what.court.sender.KoreaCourtHouse;
 
 public class CourtAppConfig {
@@ -14,10 +12,16 @@ public class CourtAppConfig {
         jobOfWitness = input;
     }
 
+    private static GovernmentPolicy governmentPolicy() {
+        return GovernmentPolicy.COVID_ALERT;
+    }
+
     private static Witness witness() {
         switch (jobOfWitness) {
             case TEACHER:
                 return new Teacher();
+            case COVID_TEACHER:
+                return new TeacherInfectedWithCovid19(governmentPolicy());
             case STUDENT:
                 return new Student();
             case SOCCER_PLAYER:
